@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #888;
+    font-size: 14px;
+}
+
+/* File Input */
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+#imageInput {
+    display: none;
+}
+
+label[for="imageInput"] {
+    display: block;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    user-select: none;
+}
+
+label[for="imageInput"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+label[for="imageInput"]:active {
+    transform: translateY(0);
+}
+
+/* Canvas */
+.canvas-wrapper {
+    position: relative;
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 15px;
+    border: 2px dashed #ddd;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    background: black;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+canvas:active {
+    cursor: grabbing;
+}
+
+.zoom-info {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* Instructions */
+.instructions {
+    background: #f0f4ff;
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 25px 0;
+    font-size: 13px;
+    color: #333;
+}
+
+.instructions p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.instructions p:first-child {
+    margin-top: 0;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.instructions strong {
+    color: #333;
+}
+
+/* Threshold Controls */
+.threshold-controls {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+.threshold-group {
+    margin-bottom: 20px;
+}
+
+.threshold-group:last-child {
+    margin-bottom: 0;
+}
+
+.threshold-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.threshold-group span {
+    background: #667eea;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+}
+
+/* Buttons */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 25px 0;
+}
+
+button {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    user-select: none;
+    text-transform: none;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-save:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-save:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-reset {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-reset:hover:not(:disabled) {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.btn-reset:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Message */
+.message {
+    min-height: 20px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 15px;
+    animation: fadeInOut 3s ease-in-out forwards;
+}
+
+.message.success {
+    color: #4caf50;
+}
+
+.message.error {
+    color: #f44336;
+}
+
+.message.info {
+    color: #2196f3;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+    .instructions {
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    button {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .zoom-info {
+        top: 20px;
+        right: 20px;
+        font-size: 11px;
+    }
+}
+
+/* Landscape Mode auf Handy */
+@media (max-height: 600px) and (orientation: landscape) {
+    .container {
+        padding: 15px;
+    }
+
+    header {
+        margin-bottom: 15px;
+    }
+
+    header h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+    .instructions {
+        display: none;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    }
+
+    .container {
+        background: #1e1e2e;
+        color: #e0e0e0;
+    }
+
+    header h1 {
+        color: #e0e0e0;
+    }
+
+    header p {
+        color: #b0b0b0;
+    }
+
+    .instructions {
+        background: #2a2a3e;
+        border-left-color: #667eea;
+        color: #e0e0e0;
+    }
+
+    .instructions p:first-child {
+        color: #9fb4ff;
+    }
+
+    .instructions strong {
+        color: #e0e0e0;
+    }
+
+    .btn-reset {
+        background: #333;
+        color: #e0e0e0;
+    }
+
+    .btn-reset:hover:not(:disabled) {
+        background: #444;
+    }
+
+    .canvas-wrapper {
+        background: #2a2a2a;
+        border-color: #444;
+    }
+}

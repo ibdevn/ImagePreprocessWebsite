@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Crop → 35x35</title>
+    <link rel="stylesheet" href="crop_style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bild-Zuschneider</h1>
+            <p>Zuschneiden, zoomen und herunterladen</p>
+        </header>
+
+        <div class="controls">
+            <div class="input-group">
+                <input type="file" id="imageInput" accept="image/*">
+                <label for="imageInput">📸 Bild öffnen</label>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="canvas"></canvas>
+            <div class="zoom-info" id="zoomInfo">1.0x</div>
+        </div>
+
+        <div class="instructions">
+            <p><strong>📱 Bedienung:</strong></p>
+            <p><strong>Desktop:</strong> Drag zum Verschieben | Mausrad zum Zoomen</p>
+            <p><strong>Handy/Tablet:</strong> Finger zum Verschieben | Zwei Finger zum Zoomen</p>
+        </div>
+
+        <div class="threshold-controls">
+            <div class="threshold-group">
+                <label for="darkThreshold">🖤 Dunkel-Schwelle: <span id="darkValue">50</span></label>
+                <input type="range" id="darkThreshold" min="0" max="100" value="50">
+            </div>
+            <div class="threshold-group">
+                <label for="lightThreshold">⚪ Hell-Schwelle: <span id="lightValue">100</span></label>
+                <input type="range" id="lightThreshold" min="0" max="255" value="100">
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="saveCropBtn" class="btn-save">💾 Als NPY speichern</button>
+            <button id="savePngBtn" class="btn-save">🖼️ Als PNG speichern</button>
+            <button id="resetBtn" class="btn-reset">🔄 Zurücksetzen</button>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script src="crop_script.js"></script>
+</body>
+</html>
